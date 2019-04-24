@@ -5,6 +5,29 @@ import { Page } from 'csstype'
 import { Config } from '../config.js'
 import fetch from 'isomorphic-unfetch'
 
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const topBarLinks = gql`
+  {
+    menu(id: "TWVudTo4") {
+      count
+      id
+      menuId
+      name
+      slug
+      menuItems {
+        edges {
+          node {
+            url
+            label
+          }
+        }
+      }
+    }
+  }
+`
+
 const layoutStyle = {
   maxWidth: 1200,
   margin: 'auto'
