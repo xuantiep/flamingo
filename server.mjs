@@ -1,32 +1,42 @@
-const express = require('express');
-const next = require('next');
-const graphqltools = require('graphql-tools');
-const apolloFetch = require('apollo-fetch');
-// import {makeRemoteExecutableSchema, introspectSchema} from 'graphql-tools'
-// import { createApolloFetch } from 'apollo-fetch';
+
+// const express = require('express');
+// const next = require('next');
+// const graphqltools = require('graphql-tools');
+// const apolloFetch = require('apollo-fetch');
+// const ApolloServer = require('apollo-server-express');
+// import HttpLink from 'apollo-link-http';
+// const fetch = require('isomorphic-unfetch');
+import graphqlTools from 'graphql-tools'
+import apolloFetch from 'apollo-fetch';
+import express from 'express';
+import next from 'next';
+import * as ApolloServer from 'apollo-server-express';
+import HttpLink from 'apollo-link-http';
+import fetch from 'isomorphic-unfetch';
+// const express = require('express');
+// const next = require('next');
+// const ApolloServer = require('apollo-server-express');
+// import HttpLink from 'apollo-link-http';
+// const fetch = require('isomorphic-unfetch');
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const createRemoteSchema = async (uri) => {
-  const fetcher = apolloFetch.createApolloFetch({uri: uri});
-  console.log("hello");
+  // const fetcher = await createApolloFetch({uri: uri});
+
+  const link = new HttpLink({ uri: uri, fetch });
   try {
-  const schemaIntrospect = await graphqltools.introspectSchema(fetcher);
-  } catch(e) {
-    console.log('error message below');
+    const schema = makeRemoteExecutableSchema({
+      schema: await introspectSchema(link),
+      link,
+    });
+    return schema;
+  } catch (e) {
+    console.log("the error message is");
     console.log(e);
   }
-  console.log("hello1");
-
-  const toReturn = await graphqltools.makeRemoteExecutableSchema({
-    schema: schemaIntrospect,
-    fetcher
-  });
-
-  console.log("hello2");
-  return toReturn;
   // return graphqltools.makeRemoteExecutableSchema({
   //   schema: await graphqltools.introspectSchema(fetcher),
   //   fetcher
@@ -35,8 +45,8 @@ const createRemoteSchema = async (uri) => {
 
 app.prepare().then(() => {
   createRemoteSchema('http://localhost:8080/graphql').then((schema) => {
-    const apollo = new ApolloServer({schema});
-
+    const apollo = new ApolloServer({schema: schema});
+    console.log("did we get in here?");
     const server = express();
     apollo.applyMiddleware({ app: server })
 

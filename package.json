@@ -7,6 +7,9 @@
     "@dailybruin/lux": "file:.yalc/@dailybruin/lux",
     "@zeit/next-typescript": "^1.1.1",
     "apollo-fetch": "^0.7.0",
+    "apollo-link-http": "^1.5.14",
+    "apollo-server": "^2.4.8",
+    "apollo-server-express": "^2.4.6",
     "express": "^4.16.4",
     "graphql": "^14.2.1",
     "graphql-anywhere": "^4.2.1",
@@ -22,7 +25,7 @@
     "react-dom": "^16.6.3"
   },
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node --experimental-modules server.mjs",
     "build": "next build",
     "start": "next start"
   },
