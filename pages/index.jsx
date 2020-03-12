@@ -91,6 +91,8 @@ class Index extends Component {
     const spStoryRes = await fetch(
       `${Config.apiUrl}/wp-json/wp/v2/posts?_embed&per_page=3&categories=${sportsCATID}`
     );
+    const pollRes = await fetch(`http://64.225.32.71/wp-json/db/v1/poll`);
+
     posts.aStory = await aStoryRes.json();
     posts.bStory = await bStoryRes.json();
     posts.c1Story = await c1StoryRes.json();
@@ -106,7 +108,8 @@ class Index extends Component {
     posts.opinionList = await opStoryRes.json();
     posts.artsList = await aeStoryRes.json();
     posts.sportsList = await spStoryRes.json();
-    return { posts, multimediaPosts };
+    const poll = await pollRes.json();
+    return { posts, multimediaPosts, poll };
   }
 
   componentDidMount() {
@@ -124,7 +127,6 @@ class Index extends Component {
         }
       }
     }
-    console.log(Cookies.get());
   }
 
   subscribeToNewsletter = () => {
@@ -157,6 +159,7 @@ class Index extends Component {
             close={this.closeNewsletterPopup}
           />
         ) : null}
+        <div dangerouslySetInnerHTML={{__html: this.props.poll.html}}></div>
       </div>
     );
   }
