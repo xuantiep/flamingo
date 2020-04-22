@@ -1,23 +1,21 @@
 import * as React from "react";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-
-import { headlineFont, cardShadow, regularFont, bodyFont } from "../globals";
+import * as globals from "../globals";
 
 function Classified(props) {
   return (
     <div
       css={css`
-        font-family: Source Sans Pro;
         font-size: 12px;
-        line-height: 15px;
         padding: 6px 0;
-        border-bottom: 1px solid #474747;
+        border-bottom: 0.5px solid #474747;
       `}
     >
       <a
         href={props.category.url}
         css={css`
+          font-family: ${globals.menuFont};
           font-weight: 700;
           color: #0080c6;
           text-transform: uppercase;
@@ -27,19 +25,29 @@ function Classified(props) {
             text-decoration: underline;
           }
         `}
-      >
-        {props.category.name}
-      </a>
+        dangerouslySetInnerHTML={{ __html: props.category.name }}
+      ></a>
       <br />
       <a
         href={props.content.url}
         css={css`
+          font-family: ${globals.bodyFont};
+          font-weight: 300;
+          font-size: 11px;
           color: #000000;
           text-decoration: none;
+
+          &:hover {
+            color: #444;
+            text-decoration: none;
+          }
+
+          p {
+            margin: 0;
+          }
         `}
-      >
-        {props.content.name}
-      </a>
+        dangerouslySetInnerHTML={{ __html: props.content.name }}
+      ></a>
     </div>
   );
 }
@@ -62,17 +70,17 @@ export default class ClassifiedsCard extends React.Component {
     return (
       <div
         css={css`
-          box-shadow: ${cardShadow};
+          box-shadow: ${globals.cardShadow};
           background-color: #ffffff;
         `}
       >
         <div
           css={css`
             background-color: #000000;
-            height: 24px;
-            padding: 0 6px;
+            height: 27px;
+            padding: 2px 10px 0;
 
-            font-family: Source Sans Pro;
+            font-family: ${globals.menuFont};
             font-style: normal;
             font-weight: 900;
             font-size: 18px;
@@ -93,9 +101,9 @@ export default class ClassifiedsCard extends React.Component {
         </div>
         <div style={{ textAlign: "right", padding: "12px 12px 6px" }}>
           <a
-            href={"./#"}
+            href="https://dailybruin.com/classifieds"
             css={css`
-              font-family: Source Sans Pro;
+              font-family: ${globals.menuFont};
               font-size: 12px;
               line-height: 15px;
               font-weight: bold;
@@ -108,7 +116,7 @@ export default class ClassifiedsCard extends React.Component {
               }
             `}
           >
-            {"./#"}
+            More classifieds »
           </a>
         </div>
       </div>

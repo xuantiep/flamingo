@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import { Config } from "../config.js";
-import Head from "next/head"
+import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 
 import MainSiteFooter from "../components/MainSiteFooter";
-import BreakingCard from "../components/BreakingCard";
-import InTheNews from "../components/InTheNews";
+import BreakingCard from "../components/BreakingBanner";
+import InTheNews from "../components/InTheNewsBanner";
 import Masthead from "../components/Masthead";
+import CommentFAB from "../components/CommentFAB";
 
-import "./style.css";
+import css from "./style.css";
+
+const wrapperStyle = {
+  padding: "6px",
+  backgroundColor: "#f1f1f1",
+  width: "100%",
+  height: "100%"
+};
 
 const layoutStyle = {
   maxWidth: 1248,
@@ -26,74 +34,6 @@ const bannerAdStyle = {
   fontFamily: "sans-serif",
   margin: "6px auto"
 };
-
-const cats = [
-  {
-    name: "News",
-    href: "/category/[slug]",
-    as: "/category/news"
-  },
-  {
-    name: "Sports",
-    href: "/category/[slug]",
-    as: "/category/sports"
-  },
-  {
-    name: "Arts",
-    href: "/category/[slug]",
-    as: "/category/arts"
-  },
-  {
-    name: "Opinion",
-    href: "/category/[slug]",
-    as: "/category/opinion"
-  },
-  {
-    name: "Photo",
-    href: "/category/[slug]",
-    as: "/category/photo"
-  },
-  {
-    name: "Video",
-    href: "/category/[slug]",
-    as: "/category/video"
-  },
-  {
-    name: "Illustrations",
-    href: "/category/[slug]",
-    as: "/category/illustrations"
-  },
-  {
-    name: "Graphics",
-    href: "/category/[slug]",
-    as: "/category/graphics"
-  },
-  {
-    name: "Enterprise",
-    href: "/category/[slug]",
-    as: "/category/enterprise"
-  },
-  {
-    name: "Prime",
-    href: "https://prime.dailybruin.com",
-    as: "https://prime.dailybruin.com"
-  },
-  {
-    name: "The Quad",
-    href: "/category/[slug]",
-    as: "/category/quad"
-  },
-  {
-    name: "The Stack",
-    href: "https://stack.dailybruin.com",
-    as: "https://stack.dailybruin.com"
-  },
-  {
-    name: "Podcasts",
-    href: "/category/[slug]",
-    as: "/category/pocasts"
-  }
-];
 
 const PageWrapper = Comp =>
   class extends Component {
@@ -142,7 +82,6 @@ const PageWrapper = Comp =>
           return { name: index.title, href: index.url, as: index.url };
         });
       }
-      console.log(mappedITN);
       return {
         ...(Comp.getInitialProps ? childProps : null),
         mappedCategories,
@@ -152,6 +91,9 @@ const PageWrapper = Comp =>
     }
 
     render() {
+      if (this.props.feature == true) {
+        return <Comp {...this.props} />;
+      }
       let renderedBreakingCard;
       if (this.props.mappedBreaking != null) {
         renderedBreakingCard = (
@@ -161,7 +103,7 @@ const PageWrapper = Comp =>
         );
       }
       let renderedInTheNews;
-      if (this.props.mappedITN != null) {
+      if (this.props.mappedITN != null && this.props.mappedBreaking == null) {
         renderedInTheNews = (
           <div style={{ padding: "6px" }}>
             <InTheNews stories={this.props.mappedITN} />
@@ -169,18 +111,19 @@ const PageWrapper = Comp =>
         );
       }
       return (
-        <div style={layoutStyle}>
-          <Head>
-            <title>Daily Bruin - Since 1919</title>
-          </Head>
-          <div style={bannerAdStyle}>ADVERTISEMENT</div>
-          <Masthead categories={this.props.mappedCategories}></Masthead>
-          {renderedBreakingCard}
-          {renderedInTheNews}
-          <Comp {...this.props} />
-          <div style={{ padding: "6px" }}>
-
-            <MainSiteFooter />
+        <div style={wrapperStyle}>
+          <div style={layoutStyle}>
+            <CommentFAB></CommentFAB>
+            <div className={css["banner-ad"]}>
+              <broadstreet-zone zone-id="69404"></broadstreet-zone>
+            </div>
+            <Masthead categories={this.props.mappedCategories}></Masthead>
+            {renderedBreakingCard}
+            {renderedInTheNews}
+            <Comp {...this.props} />
+            <div style={{ padding: "6px" }}>
+              <MainSiteFooter />
+            </div>
           </div>
         </div>
       );
