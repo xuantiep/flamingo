@@ -1,54 +1,23 @@
-// import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as React from 'react'
+import React, { Component } from "react";
+import fetch from "isomorphic-unfetch";
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import * as MainSiteStyles from '../globals'
 
-class Choice extends React.Component {
-   state = {
-    votes: this.props.votes,
-  }
+import { css, jsx } from "@emotion/core";
+import * as globals from "../globals";
 
-  constructor(props) {
-    super(props)
-  }
-
-   handleClick = () => {
-    this.setState({ votes: this.state.votes + 1 })
-    this.props.handler()
-  }
-
-   render() {
+export default class Choice extends Component {
+  render() {
     return (
       <div
         css={css`
-          padding: 5px 0px 5px;
-          &:first-child {
-            padding-top: 0px;
-          }
-          &:last-child {
-            border-bottom: none;
-            padding-bottom: 0px;
-          }
+          position: relative;
+          width: 250px;
+          height: 50px;
+          background: green;
         `}
       >
-        <p
-          css={css`
-            font-family: ${MainSiteStyles.headlineFont}, serif;
-            font-size: 0.775rem;
-            font-weight: 700;
-            line-height: 1rem;
-            margin: 0px 0px 3px;
-          `}
-        >
-          <a onClick={this.handleClick}>
-          </a>
-          {this.props.choice}
-        </p>
+        Yo
       </div>
-    )
+    );
   }
 }
-
-export default Choice

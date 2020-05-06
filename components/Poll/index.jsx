@@ -1,81 +1,69 @@
-import * as React from 'react'
+import React, { Component } from "react";
+import fetch from "isomorphic-unfetch";
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import * as MainSiteStyles from '../globals'
-import Choice from './Choice'
-import Question from './Question'
-import Graph from './Graph'
 
-class Poll extends React.Component {
-   state = {
-    hasVoted: false,
+import { css, jsx } from "@emotion/core";
+import * as globals from "../globals";
+
+import Choice from "./Choice";
+
+export default class Poll extends Component {
+  static async getInitialProps(context) {
+    const pollRes = await fetch(
+      `http://64.225.32.71/wp-json/wp/v2/poll?id=2`
+    ).then(response => console.log(response));
+    const poll = await pollRes.json();
+    return { poll };
   }
 
-  constructor(props) {
-    super(props)
-    this.handler = this.handler.bind(this)
-  }
-
-   handler() {
-    this.setState({
-      hasVoted: true,
-    })
-  }
-
-   render() {
-    const renderedChoices = this.props.poll.map((poll, index) => (
-      <Choice
-        choice={poll.choice}
-        votes={poll.votes}
-        key={index}
-        handler={this.handler}
-      />
-    ))
-
+  render() {
     return (
       <div
         css={css`
-          background-color: ${MainSiteStyles.white};
-          box-shadow: ${MainSiteStyles.cardShadow};
-          justify-content: center;
-          margin: auto;
-          max-width: 292px;
+          position: fixed;
+          width: 300px;
+          height: 400px;
+          box-shadow: ${globals.cardShadow};
+          font-family: Source Sans Pro;
         `}
       >
         <div
           css={css`
-            background-color: ${MainSiteStyles.black};
-            padding: 2px 0px 4px 10px;
+            position: relative;
+            width: 100%;
+            height: 10%;
+            background: #000000;
           `}
         >
-          <h2
+          <div
             css={css`
-              color: ${MainSiteStyles.white};
-              font-family: ${MainSiteStyles.menuFont}, sans-serif;
-              font-size: 1.125rem;
-              font-weight: 900;
-              line-height: 1.4375rem;
-              margin: 0px;
-              overflow-wrap: break-word;
+              position: relative;
+              color: #ffffff;
+              font-family: Source Sans Pro;
+              font-weight: bold;
+              font-size: 18px;
+              padding-left: 3%;
+              padding-top: 1%;
             `}
           >
-            {'POLL'}
-          </h2>
+            POLL
+          </div>
         </div>
-        <Question text={this.props.question} />
         <div
           css={css`
-            padding: ${MainSiteStyles.cardPadding};
+            position: relative;
+            width: 90%;
+            height: 90%;
+            margin: 5% 0 0 5%;
+            font-family: PT Serif;
+            font-size: 12px;
           `}
         >
-          {!this.state.hasVoted && renderedChoices}
-          {this.state.hasVoted && (
-            <Graph data={this.props.poll} legend={this.props.legend} />
-          )}
+          {this.props.poll.poll.question}
+
+          <Choice />
         </div>
       </div>
-    )
+    );
   }
 }
-
-export default Poll

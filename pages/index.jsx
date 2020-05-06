@@ -90,9 +90,7 @@ class Index extends Component {
     const spStoryRes = await fetch(
       `${Config.apiUrl}/wp-json/wp/v2/posts?_embed&per_page=3&categories=${sportsCATID}`
     );
-    const pollRes = await fetch(
-      `http://64.225.32.71/wp-json/db/v2/poll?id=292`
-    );
+    const pollRes = await fetch(`http://64.225.32.71/wp-json/wp/v2/poll?id=2`);
 
     const classifiedsRes = await fetch(
       `${Config.apiUrl}/wp-json/wp/v2/classifieds?_embed&Featured=3`
@@ -160,6 +158,7 @@ class Index extends Component {
   };
 
   render() {
+    console.log(this.props.poll);
     return (
       <>
         <Head>
