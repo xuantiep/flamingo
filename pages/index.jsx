@@ -220,7 +220,7 @@ class Index extends Component {
         ) : null}
         {this.state.showWelcome ? (
           <WelcomePopUp
-            bodytext="Here's a sneak peek of the redesigned digital home fo the Daily Bruin. This site is still under active development, so please provide feedback and comments by clicking the button on the bottom right of your screen."
+            bodytext="Here's a sneak peek of the redesigned digital home for the Daily Bruin. This site is still under active development, so please provide feedback and comments by clicking the button on the bottom right of your screen."
             close={this.closeWelcomePopup}
           />
         ) : null}

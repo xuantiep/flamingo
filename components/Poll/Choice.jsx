@@ -4,6 +4,7 @@ import fetch from "isomorphic-unfetch";
 
 import { css, jsx } from "@emotion/core";
 import * as globals from "../globals";
+import button from "./pollbutton.svg";
 
 export default class Choice extends Component {
   render() {
@@ -11,12 +12,45 @@ export default class Choice extends Component {
       <div
         css={css`
           position: relative;
-          width: 250px;
-          height: 50px;
-          background: green;
+          display: flex;
+          align-items: center;
+          width: 100%;
         `}
       >
-        Yo
+        {this.props.voted ? (
+          <p
+            css={css`
+              font-size: 20px;
+              font-weight: bold;
+              margin: 0 10px 0 0;
+              font-family: ${globals.menuFont};
+            `}
+          >
+            {this.props.percent}%
+          </p>
+        ) : (
+          <input
+            css={css`
+              width: 20px;
+              margin: 0 10px 0 0;
+            `}
+            type="image"
+            src={button}
+            onClick={this.props.vote}
+          />
+        )}
+
+        <p
+          css={css`
+            position: relative;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: ${globals.menuFont};
+            width: 85%;
+          `}
+        >
+          {this.props.answer}
+        </p>
       </div>
     );
   }

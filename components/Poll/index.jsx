@@ -8,60 +8,87 @@ import * as globals from "../globals";
 import Choice from "./Choice";
 
 export default class Poll extends Component {
-  static async getInitialProps(context) {
-    const pollRes = await fetch(
-      `http://64.225.32.71/wp-json/wp/v2/poll?id=2`
-    ).then(response => console.log(response));
-    const poll = await pollRes.json();
-    return { poll };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      voted: false
+    };
   }
 
+  handleClick = () => {
+    this.setState({ voted: true });
+  };
+
   render() {
+    let poll = this.props.poll.poll;
+    let results = this.props.poll.result;
     return (
       <div
         css={css`
           position: fixed;
           width: 300px;
-          height: 400px;
           box-shadow: ${globals.cardShadow};
-          font-family: Source Sans Pro;
         `}
       >
         <div
           css={css`
             position: relative;
+            display: flex;
+            align-items: center;
             width: 100%;
-            height: 10%;
+            height: 30px;
             background: #000000;
           `}
         >
-          <div
+          <p
             css={css`
-              position: relative;
               color: #ffffff;
-              font-family: Source Sans Pro;
+              font-family: ${globals.menuFont};
               font-weight: bold;
-              font-size: 18px;
-              padding-left: 3%;
-              padding-top: 1%;
+              font-size: 20px;
+              padding-left: 2%;
             `}
           >
             POLL
-          </div>
+          </p>
         </div>
-        <div
+        <p
           css={css`
             position: relative;
             width: 90%;
-            height: 90%;
             margin: 5% 0 0 5%;
             font-family: PT Serif;
-            font-size: 12px;
+            font-size: 16px;
           `}
         >
-          {this.props.poll.poll.question}
-
-          <Choice />
+          {poll.question}
+        </p>
+        <div
+          css={css`
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin: 5% 0 0 5%;
+          `}
+        >
+          {this.state.voted
+            ? results.data.map(result => (
+                <Choice
+                  answer={result.polla_answers}
+                  percent={result.pourcent}
+                  voted={this.state.voted}
+                />
+              ))
+            : poll.answers.map(answer => (
+                <Choice
+                  answer={answer.polla_answers}
+                  vote={this.handleClick}
+                  voted={this.state.voted}
+                />
+              ))}
+          {}
         </div>
       </div>
     );
