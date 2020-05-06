@@ -9,6 +9,7 @@ import * as globals from "../globals";
 import AuthorInfo from "./AuthorInfo";
 import ShareCard from "../ShareCard";
 import ReviewInfobox from "../ReviewInfobox";
+import AuthorCard from "../AuthorCard";
 
 export default class Article extends React.Component {
   constructor(props) {
@@ -48,6 +49,26 @@ export default class Article extends React.Component {
               : this.props.acf["db_number_of_paws"]
           }
         ></ReviewInfobox>
+      );
+    }
+
+    let renderedAuthorCards = [];
+    for (let author of this.props.authors) {
+      renderedAuthorCards.push(
+        <div
+          css={css`
+            margin: 20px 0;
+          `}
+        >
+          <AuthorCard
+            image={author.avatar_urls[512]}
+            name={author.name}
+            description={author.description}
+            position={author.acf.position}
+            twitter={author.acf.twitter}
+            email={author.media_email}
+          />
+        </div>
       );
     }
 
@@ -259,8 +280,14 @@ export default class Article extends React.Component {
             `}
             dangerouslySetInnerHTML={{ __html: this.props.content }}
           />
-          {/* {renderedAuthorInfo} */}
-          {/* <ShareCard></ShareCard> */}
+          <div
+            css={css`
+              max-width: 600px;
+              margin: auto;
+            `}
+          >
+            {renderedAuthorCards}
+          </div>
         </div>
       </div>
     );

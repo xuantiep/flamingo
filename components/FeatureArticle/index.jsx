@@ -6,9 +6,11 @@ import moment from "moment";
 
 import { renderCategories, renderAuthors } from "./utilities";
 import * as globals from "../globals";
-import AuthorInfo from "./AuthorInfo";
+import AuthorCard from "../AuthorCard";
 import Tag from "./Tag";
 import Landing from "./Landing";
+
+import MiniArticleCard from "../ArticleCard/Mini";
 
 export default class FeatureArticle extends React.Component {
   constructor(props) {
@@ -16,6 +18,64 @@ export default class FeatureArticle extends React.Component {
   }
 
   render() {
+    let renderedTaggedCards = [];
+    for (let story of this.props.tagged) {
+      renderedTaggedCards.push(
+        <div
+          css={css`
+            max-width: 312px;
+            vertical-align: middle;
+            display: inline-block;
+            padding: 6px 12px;
+            white-space: initial;
+
+            &:first-of-type {
+              margin-left: 20px;
+            }
+            &:last-of-type {
+              margin-right: 20px;
+            }
+          `}
+        >
+          <MiniArticleCard
+            headline={story.title.rendered}
+            category={{
+              name: story._embedded["wp:term"][0][0].name,
+              href: `/category/[slug]`,
+              as: `/category/${story._embedded["wp:term"][0][0].slug}`
+            }}
+            as={`/post/${story.slug}`}
+            imageurl={
+              story._embedded["wp:featuredmedia"] != undefined &&
+              !story._embedded["wp:featuredmedia"].empty
+                ? story._embedded["wp:featuredmedia"][0].source_url
+                : "http://dailybruin.com/images/2017/03/db-logo.png"
+            }
+          ></MiniArticleCard>
+        </div>
+      );
+    }
+
+    let renderedAuthorCards = [];
+    for (let author of this.props.authors) {
+      renderedAuthorCards.push(
+        <div
+          css={css`
+            margin: 20px 0;
+          `}
+        >
+          <AuthorCard
+            image={author.avatar_urls[512]}
+            name={author.name}
+            description={author.description}
+            position={author.acf.position}
+            twitter={author.acf.twitter}
+            email={author.media_email}
+          />
+        </div>
+      );
+    }
+
     // grab author pics
     let authorPictures = [];
     for (let author of this.props.authors) {
@@ -62,6 +122,8 @@ export default class FeatureArticle extends React.Component {
         <Landing
           headline={this.props.headline}
           img={this.props.featureimg}
+          authors={this.props.authors}
+          photostyle={this.props.acf.db_feature_photoratio}
         ></Landing>
         <div
           dangerouslySetInnerHTML={{ __html: this.props.caption }}
@@ -124,7 +186,7 @@ export default class FeatureArticle extends React.Component {
             `}
           >
             <div>
-              {authorPictures}
+              {/* {authorPictures} */}
               <div style={{ display: "inline-block", verticalAlign: "middle" }}>
                 <h3
                   css={css`
@@ -202,6 +264,11 @@ export default class FeatureArticle extends React.Component {
                     margin: auto;
                   }
                 }
+                @media (min-width: 40.5em) {
+                  aside {
+                    margin-right: -60px;
+                  }
+                }
                 aside p {
                   font-size: 0.95rem;
                   text-align: right;
@@ -212,6 +279,7 @@ export default class FeatureArticle extends React.Component {
                   font-size: 4.1rem;
                   line-height: 80%;
                   color: #000;
+                  margin-right: 2px;
                 }
 
                 figure.alignright {
@@ -234,18 +302,48 @@ export default class FeatureArticle extends React.Component {
                   width: 100%;
                 }
 
+                figure img,
                 figure a img,
                 p img,
                 b img,
                 h2 img {
                   width: 100%;
-                  height: inherit;
+                  height: auto;
                 }
               `}
               dangerouslySetInnerHTML={{ __html: this.props.content }}
             />
-            {/* {renderedAuthorInfo} */}
+            {/* {renderedAuthorCards} */}
             {/* <ShareCard></ShareCard> */}
+          </div>
+        </div>
+        <div
+          css={css`
+            background-color: #666;
+            width: 100%;
+            margin: auto;
+            padding: 20px 0 0;
+          `}
+        >
+          <div
+            css={css`
+              color: white;
+              margin: -6px 12px 6px;
+              font-weight: 700;
+              text-transform: uppercase;
+              font-family: ${globals.menuFont};
+            `}
+          >
+            Read more stories in this series:
+          </div>
+          <div
+            css={css`
+              overflow-x: scroll;
+              white-space: nowrap;
+              padding-bottom: 20px;
+            `}
+          >
+            {renderedTaggedCards}
           </div>
         </div>
       </div>

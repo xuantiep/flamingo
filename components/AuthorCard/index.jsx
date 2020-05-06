@@ -16,6 +16,11 @@ function SocialCircle(props) {
           margin: 5px;
           display: inline-block;
           background-color: ${props.color};
+          @media (max-width: 600px) {
+            width: 24px;
+            height: 24px;
+            margin: 3px;
+          }
         `}
       >
         <img
@@ -23,6 +28,11 @@ function SocialCircle(props) {
             width: 36px;
             padding: 8px;
             height: auto;
+            @media (max-width: 600px) {
+              width: 24px;
+              height: 24px;
+              padding: 6px;
+            }
           `}
           src={props.image}
         />
@@ -39,95 +49,118 @@ export default class AuthorCard extends React.Component {
         css={css`
           background-color: white;
           box-shadow: ${globals.cardShadow};
+          height: auto;
+          border-top: 7px solid #000;
+          padding: ${globals.cardPadding};
         `}
       >
         <div
           css={css`
-            display: block;
-            text-align: center;
+            display: flex;
+            align-items: center;
           `}
         >
           <div
             css={css`
-              padding: 20px;
-              max-width: 300px;
-              margin: auto;
+              margin: 5px 15px;
             `}
           >
+            <img
+              css={css`
+                border-radius: 50%;
+                max-width: 120px;
+                @media (max-width: 600px) {
+                  max-width: 60px;
+                }
+              `}
+              src={this.props.image}
+            />
             <div
               css={css`
-                height: 100%;
-                width: 100%;
-                padding-top: 100%;
-                overflow: hidden;
-                position: relative;
+                text-align: center;
               `}
             >
-              <img
-                css={css`
-                  height: 100%;
-                  width: 100%;
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  object-fit: cover;
-                  border-radius: 50%;
-                `}
-                src={this.props.image}
-              />
+              {this.props.twitter && (
+                <SocialCircle
+                  url={"https://twitter.com/" + this.props.twitter}
+                  image={twitterImage}
+                  color="#00acee"
+                />
+              )}
+              {this.props.email && (
+                <SocialCircle
+                  url={"mailto:" + this.props.email}
+                  image={emailImage}
+                  color="#B23121"
+                />
+              )}
             </div>
           </div>
-          <h1
-            css={css`
-              font-style: "bold";
-              font-size: 24px;
-              line-height: 1.6rem;
-              text-align: center;
-              font-family: ${globals.headlineFont};
-              color: black;
-              padding: 0px 20px 5px 20px;
-              margin: 0px;
-            `}
-          >
-            {this.props.name}
-          </h1>
-          <div
-            css={css`
-              text-align: center;
-              margin-bottom: 5px;
-            `}
-          >
-            {this.props.twitter && (
-              <SocialCircle
-                url={"https://twitter.com/" + this.props.twitter}
-                image={twitterImage}
-                color="#00acee"
-              />
-            )}
-            {this.props.email && (
-              <SocialCircle
-                url={"mailto:" + this.props.email}
-                image={emailImage}
-                color="#B23121"
-              />
-            )}
+          <div>
+            <div
+              css={css`
+                font-weight: "bold";
+                font-size: 24px;
+                text-align: left;
+                font-family: ${globals.headlineFont};
+                color: black;
+                margin: 0px;
+              `}
+            >
+              {this.props.name}
+              <span
+                css={css`
+                  @media (max-width: 600px) {
+                    display: none;
+                  }
+                `}
+              >
+                {this.props.position == undefined || this.props.position == ""
+                  ? ""
+                  : " | "}
+              </span>
+              <span
+                css={css`
+                  font-family: ${globals.bodyFont};
+                  font-size: 16px;
+
+                  @media (max-width: 600px) {
+                    display: block;
+                  }
+                `}
+              >
+                {this.props.position}
+              </span>
+            </div>
+            <div
+              css={css`
+                font-family: ${globals.bodyFont};
+                font-weight: 300;
+                text-align: left;
+                padding: 15px 15px 5px 0px;
+                font-size: 12px;
+                @media (max-width: 600px) {
+                  display: none;
+                }
+              `}
+              dangerouslySetInnerHTML={{ __html: this.props.description }}
+            />
           </div>
         </div>
-        <h3
+        <div
           css={css`
-            text-transform: uppercase;
-            text-align: center;
-            color: white;
-            background-color: black;
-            padding: 4px 0px;
-            line-height: 1.6rem;
-            margin: 0px;
-            font-family: ${globals.menuFont};
+            font-family: ${globals.bodyFont};
+            font-weight: 300;
+            text-align: left;
+            padding: 0px 15px 5px 0px;
+            font-size: 12px;
+            display: none;
+            @media (max-width: 600px) {
+              display: block;
+            }
           `}
-        >
-          {this.props.position}
-        </h3>
+          dangerouslySetInnerHTML={{ __html: this.props.description }}
+        />
       </div>
     );
   }
