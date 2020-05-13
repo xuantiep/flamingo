@@ -18,39 +18,54 @@ export default class Choice extends Component {
         `}
       >
         {this.props.voted ? (
-          <p
-            css={css`
-              font-size: 20px;
-              font-weight: bold;
-              margin: 0 10px 0 0;
-              font-family: ${globals.menuFont};
-            `}
-          >
-            {this.props.percent}%
-          </p>
+          <>
+            <p
+              css={css`
+                font-size: 18px;
+                font-weight: bold;
+                margin: 0 5px 0 0;
+                width: 40px;
+                font-family: ${globals.menuFont};
+              `}
+            >
+              {this.props.percent}%
+            </p>
+            <p
+              css={css`
+                position: relative;
+                font-size: 14px;
+                font-weight: bold;
+                font-family: ${globals.menuFont};
+                width: 85%;
+              `}
+            >
+             ({this.props.numvotes} votes) {this.props.answer} 
+            </p>
+          </>
         ) : (
-          <input
-            css={css`
-              width: 20px;
-              margin: 0 10px 0 0;
-            `}
-            type="image"
-            src={button}
-            onClick={this.props.vote}
-          />
+          <>
+            <input
+              css={css`
+                width: 20px;
+                margin: 0 10px 0 0;
+              `}
+              type="image"
+              src={button}
+              onClick={this.props.vote}
+            />
+            <p
+              css={css`
+                position: relative;
+                font-size: 14px;
+                font-weight: bold;
+                font-family: ${globals.menuFont};
+                width: 85%;
+              `}
+            >
+              {this.props.answer}
+            </p>
+          </>
         )}
-
-        <p
-          css={css`
-            position: relative;
-            font-size: 14px;
-            font-weight: bold;
-            font-family: ${globals.menuFont};
-            width: 85%;
-          `}
-        >
-          {this.props.answer}
-        </p>
       </div>
     );
   }

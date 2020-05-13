@@ -78,6 +78,7 @@ export default class Poll extends Component {
                 <Choice
                   answer={result.polla_answers}
                   percent={result.pourcent}
+                  numvotes={result.polla_votes}
                   voted={this.state.voted}
                 />
               ))
@@ -88,8 +89,21 @@ export default class Poll extends Component {
                   voted={this.state.voted}
                 />
               ))}
-          {}
         </div>
+        {this.state.voted ? (
+          <p
+            css={css`
+              position: relative;
+              text-align: center;
+              font-family: PT Serif;
+              font-size: 16px;
+              height: 30px;
+              margin: 0;
+            `}
+          >
+            Total Votes: {poll.pollq_totalvotes}
+          </p>
+        ) : null}
       </div>
     );
   }
