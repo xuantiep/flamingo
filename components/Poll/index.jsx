@@ -23,12 +23,15 @@ export default class Poll extends Component {
   render() {
     let poll = this.props.poll.poll;
     let results = this.props.poll.result;
+    let maxpercent = this.props.poll.result.data[0].pourcent
     return (
       <div
         css={css`
-          position: fixed;
+          display: block;
+          position: relative;
           width: 300px;
           box-shadow: ${globals.cardShadow};
+          background: ${globals.white};
         `}
       >
         <div
@@ -78,6 +81,7 @@ export default class Poll extends Component {
                 <Choice
                   answer={result.polla_answers}
                   percent={result.pourcent}
+                  maxpercent={maxpercent}
                   numvotes={result.polla_votes}
                   voted={this.state.voted}
                 />

@@ -362,6 +362,9 @@ export default class HomeLayout extends React.Component {
                       <div id="qd" className={css.card}>
                         {this.state.qdStoryList}
                       </div>
+                      <div id="poll" className={css.card}>
+                        <Poll poll={this.props.poll} />
+                      </div>
                       <div id="d" className={css.card}>
                         {React.cloneElement(this.state.dArticleCard, {
                           displayType: "mini"

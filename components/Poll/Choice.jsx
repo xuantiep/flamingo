@@ -15,10 +15,23 @@ export default class Choice extends Component {
           display: flex;
           align-items: center;
           width: 100%;
+          padding-left: 5px;
+          z-index: 1;
         `}
       >
         {this.props.voted ? (
           <>
+            <div
+              css={css`
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                width: ${(this.props.percent/this.props.maxpercent)*100}%;
+                height: 100%;
+                background: ${globals.gray};
+                z-index: 2;
+              `}
+            />
             <p
               css={css`
                 font-size: 18px;
@@ -26,6 +39,7 @@ export default class Choice extends Component {
                 margin: 0 5px 0 0;
                 width: 40px;
                 font-family: ${globals.menuFont};
+                z-index: 3;
               `}
             >
               {this.props.percent}%
@@ -37,9 +51,10 @@ export default class Choice extends Component {
                 font-weight: bold;
                 font-family: ${globals.menuFont};
                 width: 85%;
+                z-index: 3;
               `}
             >
-             ({this.props.numvotes} votes) {this.props.answer} 
+              ({this.props.numvotes} votes) {this.props.answer}
             </p>
           </>
         ) : (
@@ -48,6 +63,7 @@ export default class Choice extends Component {
               css={css`
                 width: 20px;
                 margin: 0 10px 0 0;
+                z-index: 3;
               `}
               type="image"
               src={button}
@@ -60,6 +76,7 @@ export default class Choice extends Component {
                 font-weight: bold;
                 font-family: ${globals.menuFont};
                 width: 85%;
+                z-index: 3;
               `}
             >
               {this.props.answer}

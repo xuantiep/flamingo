@@ -90,7 +90,7 @@ class Index extends Component {
     const spStoryRes = await fetch(
       `${Config.apiUrl}/wp-json/wp/v2/posts?_embed&per_page=3&categories=${sportsCATID}`
     );
-    const pollRes = await fetch(`http://64.225.32.71/wp-json/wp/v2/poll?id=2`);
+    const pollRes = await fetch(`http://64.225.32.71/wp-json/wp/v2/poll?id=3`);
 
     const classifiedsRes = await fetch(
       `${Config.apiUrl}/wp-json/wp/v2/classifieds?_embed&Featured=3`
@@ -202,6 +202,7 @@ class Index extends Component {
         <HomeLayout
           posts={this.props.posts}
           media={this.props.multimediaPosts}
+          poll={this.props.poll}
           classifieds={this.props.classifieds.map(c => {
             return {
               category: {
