@@ -1,6 +1,9 @@
+/*
 import * as React from "react";
 import Link from "next/link";
+
 /** @jsx jsx */
+/*
 import { css, jsx } from "@emotion/core";
 import * as globals from "../globals";
 
@@ -54,3 +57,4 @@ export default class SponsoredLinks extends React.Component {
     );
   }
 }
+*/

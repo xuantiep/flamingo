@@ -9,7 +9,7 @@ import Media from "react-media";
 import ClassifiedsCard from "../../components/ClassifiedsCard";
 import Poll from "../../components/Poll";
 import StoryList from "../../components/StoryList";
-import SponsoredLinks from "../../components/SponsoredLinks";
+/*import SponsoredLinks from "../../components/SponsoredLinks";*/
 import TwitterFeed from "../../components/TwitterFeed";
 
 const ArticleAdStyle = {
@@ -321,9 +321,9 @@ export default class HomeLayout extends React.Component {
                             />
                           </a>
                         </div>
-                        <div className={css.card}>
+                        {/*<div className={css.card}>
                           <SponsoredLinks links={this.props.sponsoredLinks} />
-                        </div>
+                        </div>*/}
                       </div>
                     </div>
                   </div>
@@ -465,11 +465,11 @@ export default class HomeLayout extends React.Component {
                         </a>
                       </div>
                     </div> */}
-                    <div className={css.column} style={{ width: "50%" }}>
+                    {/*<div className={css.column} style={{ width: "50%" }}>
                       <div className={css.card}>
                         <SponsoredLinks links={this.props.sponsoredLinks} />
                       </div>
-                    </div>
+                    </div>*/}
                   </div>
                 </div>
               )}

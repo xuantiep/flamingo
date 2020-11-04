@@ -96,7 +96,7 @@ class Index extends Component {
     const classifiedsRes = await fetch(
       `${Config.apiUrl}/wp-json/wp/v2/classifieds?_embed&Featured=3`
     );
-    const sponsoredRes = await fetch(`${Config.apiUrl}/wp-json/db/v1/links`);
+   /*const sponsoredRes = await fetch(`${Config.apiUrl}/wp-json/db/v1/links`);*/
     posts.aStory = await aStoryRes.json();
     posts.bStory = await bStoryRes.json();
     posts.c1Story = await c1StoryRes.json();
@@ -113,8 +113,9 @@ class Index extends Component {
     posts.artsList = await aeStoryRes.json();
     posts.sportsList = await spStoryRes.json();
     const classifieds = await classifiedsRes.json();
-    const sponsored = await sponsoredRes.text();
-    return { posts, multimediaPosts, classifieds, sponsored };
+    /*const sponsored = await sponsoredRes.text();
+    return { posts, multimediaPosts, classifieds, sponsored };*/
+    return { posts, multimediaPosts, classifieds };
   }
 
   componentDidMount() {
@@ -213,7 +214,7 @@ class Index extends Component {
               content: { name: c.content.rendered, url: c.link }
             };
           })}
-          sponsoredLinks={this.props.sponsored.replace("null", "")}
+          /*sponsoredLinks={this.props.sponsored.replace("null", "")}*/
         />
         {this.state.showPopUp && !this.state.showWelcome ? (
           <EmailPopUp
