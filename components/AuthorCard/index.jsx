@@ -67,7 +67,7 @@ export default class AuthorCard extends React.Component {
           >
             <img
               css={css`
-                border-radius: 50%;
+                border-radius: 0;
                 max-width: 120px;
                 @media (max-width: 600px) {
                   max-width: 60px;
