@@ -225,6 +225,7 @@ export default class Article extends React.Component {
                 color: ${globals.darkGray};
                 max-width: 640px;
                 margin: 20px auto 0;
+                font-style: italic;
               `}
               dangerouslySetInnerHTML={{ __html: this.props.acf.corrections }}
             ></div>
