@@ -28,7 +28,13 @@ export default class SectionHeader extends React.Component {
         );
       } else {
         return (
-          <div dangerouslySetInnerHTML={{ __html: this.props.category }}></div>
+          <div 
+          css={css`
+          color: ${globals.DBblue};
+          `}
+          >
+            {this.props.category}
+          </div>
         );
       }
     };
