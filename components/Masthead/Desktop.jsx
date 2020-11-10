@@ -309,6 +309,7 @@ export default class Desktop extends React.Component {
                 <a href="https://giving.ucla.edu/campaign/?&amount=100&OrgType=C&OrgNum=11300&fund=31601O&_ga=2.101555268.497205227.1521136411-359345519.1518723170">
                   Donate
                 </a>
+                <a href="https://dailybruin.com/about">About</a>
               </div>
               <div
                 css={css`
