@@ -8,7 +8,7 @@ import Media from "react-media";
 
 import LoadingBear from "../../components/LoadingBear";
 import ClassifiedsCard from "../../components/ClassifiedsCard";
-
+import PreviewCard from "../../components/PreviewArticle";
 export default class CategoryLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -192,6 +192,10 @@ export default class CategoryLayout extends React.Component {
                       header="Featured Classifieds"
                       classifieds={this.props.classifieds}
                     />
+                    <PreviewCard
+                      header="Preview Articles"
+                      classifieds={this.props.classifieds}
+                    />
                   </div>
                 </div>
               </div>
@@ -278,6 +282,10 @@ export default class CategoryLayout extends React.Component {
                   <div id="classifieds" className={css.card}>
                     <ClassifiedsCard
                       header="Featured Classifieds"
+                      classifieds={this.props.classifieds}
+                    />
+                    <PreviewCard
+                      header="Preview Articles"
                       classifieds={this.props.classifieds}
                     />
                   </div>
