@@ -86,14 +86,46 @@ export function buildMultimediaScroller(media) {
   return <MultimediaScroller media={mappedMedia} />;
 }
 
-export function buildArticleList(stories) {
+export function buildArticleList(stories, isPreview) {
   let postArray = [];
-  for (let i = 0; i < stories.length; i++) {
-    postArray.push(buildArticleCard(stories[i]));
+  if (isPreview) {
+    for (let i = 0; i < stories.length; i++) {
+      //console.log(postArray);
+      const articleTitle = stories[i].title.rendered;
+      //console.log(articleTitle.includes("preview"));
+      if (articleTitle.includes("preview")) {
+        postArray.push(buildArticleCard(stories[i]));
+      }
+    }
+  } else if (isPreview === false) {
+    for (let i = 0; i < stories.length; i++) {
+      const articleTitle = stories[i].title.rendered;
+      postArray.push(buildArticleCard(stories[i]));
+    }
   }
   return postArray;
 }
+export function buildPreviewArticleList(stories, isPrev) {
+  let postArray = [];
+  if (isPrev) {
+    for (let i = 0; i < stories.length; i++) {
+      //console.log(postArray);
+      const articleTitle = stories[i].title.rendered;
+      //console.log(articleTitle.includes("preview"));
+      if (articleTitle.includes("preview"))
+        postArray.push(buildArticleCard(stories[i]));
+    }
+  } else {
+    for (let i = 0; i < stories.length; i++) {
+      //console.log(postArray);
+      const articleTitle = stories[i].title.rendered;
+      //console.log(articleTitle.includes("preview"));
+      postArray.push(buildArticleCard(stories[i]));
+    }
+  }
 
+  return postArray;
+}
 export function renderPostArray(otherArticleCards, type) {
   let renderedPostArray = [];
   for (let i = 0; i < otherArticleCards.length; i++) {

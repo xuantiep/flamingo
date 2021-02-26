@@ -16,7 +16,14 @@ export default class CategoryLayout extends React.Component {
       aArticleCard: utilities.buildArticleCard(this.props.posts[0]),
       bArticleCard: utilities.buildArticleCard(this.props.posts[1]),
       cArticleCard: utilities.buildArticleCard(this.props.posts[2]),
-      otherArticleCards: utilities.buildArticleList(this.props.posts.slice(3)),
+      otherArticleCards: utilities.buildArticleList(
+        this.props.posts.slice(3),
+        false
+      ),
+      previewArticleCards: utilities.buildArticleList(
+        this.props.posts.slice(3),
+        true
+      ),
 
       more: true
     };
@@ -33,7 +40,12 @@ export default class CategoryLayout extends React.Component {
           if (json.data == undefined && json.length != 0) {
             this.setState({
               otherArticleCards: this.state.otherArticleCards.concat(
-                utilities.buildArticleList(json)
+                utilities.buildArticleList(json, false)
+              )
+            });
+            this.setState({
+              previewArticleCards: this.state.previewArticleCards.concat(
+                utilities.buildArticleList(json, true)
               )
             });
           } else {
@@ -192,10 +204,34 @@ export default class CategoryLayout extends React.Component {
                       header="Featured Classifieds"
                       classifieds={this.props.classifieds}
                     />
-                    <PreviewCard
-                      header="Preview Articles"
-                      classifieds={this.props.classifieds}
-                    />
+
+                    <InfiniteScroll
+                      pageStart={1}
+                      loadMore={this.getPosts}
+                      hasMore={this.state.more}
+                      threshold={3000}
+                      loader={
+                        <LoadingBear text={"searching for more articles..."} />
+                      }
+                    >
+                      {utilities.renderPostArray(
+                        this.state.previewArticleCards,
+                        "mini"
+                      )}
+                    </InfiniteScroll>
+                    {!this.state.more ? (
+                      <p
+                        style={{
+                          color: "#404040",
+                          fontFamily: "'Source Sans Pro', sans-serif",
+                          textAlign: "center"
+                        }}
+                      >
+                        no more articles!
+                      </p>
+                    ) : (
+                      <span></span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -284,10 +320,21 @@ export default class CategoryLayout extends React.Component {
                       header="Featured Classifieds"
                       classifieds={this.props.classifieds}
                     />
-                    <PreviewCard
-                      header="Preview Articles"
-                      classifieds={this.props.classifieds}
-                    />
+
+                    <InfiniteScroll
+                      pageStart={1}
+                      loadMore={this.getPosts}
+                      hasMore={this.state.more}
+                      threshold={3000}
+                      loader={
+                        <LoadingBear text={"searching for more articles..."} />
+                      }
+                    >
+                      {utilities.renderPostArray(
+                        this.state.previewArticleCards,
+                        "mini"
+                      )}
+                    </InfiniteScroll>
                   </div>
                 </div>
               </div>
@@ -298,3 +345,11 @@ export default class CategoryLayout extends React.Component {
     );
   }
 }
+/*
+To Do:
+
+make new state: otherArticleCards: utilities.buildArticleList(this.props.posts.slice(3)), that
+filters preview cards, so we have something like
+
+previewCards: utilities.buildArticleList(/Whatever here/)
+*/
