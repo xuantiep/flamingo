@@ -1,6 +1,7 @@
 import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 
 import fullStar from "./paw-filled.svg";
 import halfStar from "./paw-half-filled.svg";

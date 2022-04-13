@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Config } from "../config.js";
 import PageWrapper from "../layouts/PageWrapper";
 import Head from "next/head";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 
 import * as globals from "../components/globals";
 

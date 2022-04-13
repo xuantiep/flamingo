@@ -1,6 +1,7 @@
 import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import logo from "./dailybruin.svg";
 import * as globals from "../globals";
 import { renderAuthors } from "./utilities";

@@ -1,10 +1,11 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 
 export default class Scoreboard extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   render() {
     return (
@@ -82,6 +83,6 @@ export default class Scoreboard extends React.Component {
           </td>
         </tr>
       </table>
-    )
+    );
   }
 }

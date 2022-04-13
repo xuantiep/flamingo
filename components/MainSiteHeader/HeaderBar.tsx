@@ -1,28 +1,29 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from "@emotion/react";
 
-const dbLogo=require('./db_logo.svg')
-import * as MainSiteStyles from '../globals'
+const dbLogo = require("./db_logo.svg");
+import * as MainSiteStyles from "../globals";
 // import { faBars, faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 interface MainSiteHeaderLink {
   /** Category name */
-  category: string
+  category: string;
   /** Link location */
-  categoryURL: string
+  categoryURL: string;
 }
 
 interface MainSiteHeaderProps {
   /** Array of links that refer to sections on the main site */
-  links: MainSiteHeaderLink[]
+  links: MainSiteHeaderLink[];
   /** Display smaller version with hamburger */
-  hamburger: boolean
+  hamburger: boolean;
 }
 
 interface MainSiteHeaderState {
   /** Keeps track of hamburger menu */
-  isHamburgerOpen: boolean
+  isHamburgerOpen: boolean;
 }
 
 class HeaderBar extends React.Component<
@@ -33,75 +34,75 @@ class HeaderBar extends React.Component<
     hamburger: false,
     links: [
       {
-        category: 'News',
-        categoryURL: 'http://dailybruin.com/news',
+        category: "News",
+        categoryURL: "http://dailybruin.com/news"
       },
       {
-        category: 'Sports',
-        categoryURL: 'http://dailybruin.com/sports',
+        category: "Sports",
+        categoryURL: "http://dailybruin.com/sports"
       },
       {
-        category: 'Arts',
-        categoryURL: 'http://dailybruin.com/arts-entertainment',
+        category: "Arts",
+        categoryURL: "http://dailybruin.com/arts-entertainment"
       },
       {
-        category: 'Opinion',
-        categoryURL: 'http://dailybruin.com/opinion',
+        category: "Opinion",
+        categoryURL: "http://dailybruin.com/opinion"
       },
       {
-        category: 'Photo',
-        categoryURL: 'http://dailybruin.com/spectrum',
+        category: "Photo",
+        categoryURL: "http://dailybruin.com/spectrum"
       },
       {
-        category: 'Video',
-        categoryURL: 'http://dailybruin.com/video',
+        category: "Video",
+        categoryURL: "http://dailybruin.com/video"
       },
       {
-        category: 'Illustrations',
-        categoryURL: 'http://dailybruin.com/illustrations',
+        category: "Illustrations",
+        categoryURL: "http://dailybruin.com/illustrations"
       },
       {
-        category: 'Graphics',
-        categoryURL: 'http://dailybruin.com/graphics',
+        category: "Graphics",
+        categoryURL: "http://dailybruin.com/graphics"
       },
       {
-        category: 'PRIME',
-        categoryURL: 'http://prime.dailybruin.com',
+        category: "PRIME",
+        categoryURL: "http://prime.dailybruin.com"
       },
       {
-        category: 'The Quad',
-        categoryURL: 'http://dailybruin.com/quad',
+        category: "The Quad",
+        categoryURL: "http://dailybruin.com/quad"
       },
       {
-        category: 'The Stack',
-        categoryURL: 'http://stack.dailybruin.com',
-      },
-    ],
-  }
+        category: "The Stack",
+        categoryURL: "http://stack.dailybruin.com"
+      }
+    ]
+  };
 
   constructor(props: MainSiteHeaderProps) {
-    super(props)
-    this.state = { isHamburgerOpen: false }
-    this.hamburgerClicked = this.hamburgerClicked.bind(this)
+    super(props);
+    this.state = { isHamburgerOpen: false };
+    this.hamburgerClicked = this.hamburgerClicked.bind(this);
   }
 
   public hamburgerClicked() {
     this.setState(state => ({
-      isHamburgerOpen: !state.isHamburgerOpen,
-    }))
+      isHamburgerOpen: !state.isHamburgerOpen
+    }));
   }
 
   public render() {
-    const date = new Date()
+    const date = new Date();
 
     const dateOptions = {
-      day: 'numeric',
-      month: 'long',
-      weekday: 'long',
-      year: 'numeric',
-    }
+      day: "numeric",
+      month: "long",
+      weekday: "long",
+      year: "numeric"
+    };
 
-    const dateString = date.toLocaleDateString('en-US', dateOptions)
+    const dateString = date.toLocaleDateString("en-US", dateOptions);
     const linksInNav = this.props.links.map(propLink => {
       return (
         <a
@@ -114,8 +115,8 @@ class HeaderBar extends React.Component<
         >
           {propLink.category}
         </a>
-      )
-    })
+      );
+    });
 
     return (
       <header
@@ -128,7 +129,7 @@ class HeaderBar extends React.Component<
           box-shadow: ${MainSiteStyles.cardShadow};
           font-family: ${MainSiteStyles.headlineFont};
           font-weight: ${MainSiteStyles.boldFont};
-          color: '#000';
+          color: "#000";
         `}
       >
         <div
@@ -153,9 +154,7 @@ class HeaderBar extends React.Component<
               {dateString}
             </div>
           )}
-          {this.props.hamburger && (
-            true
-          )}
+          {this.props.hamburger && true}
           <a
             href="/"
             css={css`
@@ -166,7 +165,7 @@ class HeaderBar extends React.Component<
             <img
               src={dbLogo}
               css={css`
-                width: ${this.props.hamburger ? '200px' : '420px'};
+                width: ${this.props.hamburger ? "200px" : "420px"};
                 ${MainSiteStyles.mediaMobileBreakpoint} {
                   width: 200px;
                 }
@@ -182,7 +181,7 @@ class HeaderBar extends React.Component<
               ${MainSiteStyles.mediaMobileBreakpoint} {
                 margin-bottom: auto;
               }
-              margin-bottom: ${this.props.hamburger ? 'auto;' : '0px;'};
+              margin-bottom: ${this.props.hamburger ? "auto;" : "0px;"};
             `}
           >
             {!this.props.hamburger && <a>Advertise</a>}
@@ -221,8 +220,8 @@ class HeaderBar extends React.Component<
           </nav>
         )}
       </header>
-    )
+    );
   }
 }
 
-export default HeaderBar
+export default HeaderBar;

@@ -1,7 +1,8 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import * as MainSiteStyles from '../globals'
+import { css, jsx } from "@emotion/react";
+import * as MainSiteStyles from "../globals";
 
 export default function Question(props) {
   return (
@@ -23,5 +24,5 @@ export default function Question(props) {
         {props.text}
       </h3>
     </div>
-  )
+  );
 }

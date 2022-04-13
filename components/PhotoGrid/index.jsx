@@ -1,7 +1,8 @@
 import * as React from "react";
 import Head from "next/head";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import * as globals from "../globals";
 import Masonry from "react-masonry-component";
 

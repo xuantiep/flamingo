@@ -1,6 +1,7 @@
 import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import logo from "./db.png";
 // import minilogo from "../../public/favicons/favicon-194x194.png";
 import * as globals from "../globals";

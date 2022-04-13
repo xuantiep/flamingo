@@ -1,20 +1,21 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 
-import Scoreboard from './Scoreboard'
+import Scoreboard from "./Scoreboard";
 
 export default class SportsTournamentScoreboard extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    const scoreboards = []
-    let i = 0
+    const scoreboards = [];
+    let i = 0;
     for (const game of this.props.games) {
-      i++
-      scoreboards.push(<Scoreboard game={game} num={i} />)
+      i++;
+      scoreboards.push(<Scoreboard game={game} num={i} />);
     }
     return (
       <div
@@ -49,6 +50,6 @@ export default class SportsTournamentScoreboard extends React.Component {
         </div>
         <div>{scoreboards}</div>
       </div>
-    )
+    );
   }
 }

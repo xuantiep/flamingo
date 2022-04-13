@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Error from "next/error";
 import { Config } from "../../config.js";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import * as utilities from "./utilities";
 import Masonry from "react-masonry-component";
 import InfiniteScroll from "react-infinite-scroller";

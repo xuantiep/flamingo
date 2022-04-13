@@ -1,6 +1,7 @@
 import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 
 import { cardShadow, cardPadding, menuFont } from "../globals";
 import { DiscussionEmbed } from "disqus-react";

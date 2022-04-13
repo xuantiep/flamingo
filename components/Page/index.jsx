@@ -1,7 +1,8 @@
 import * as React from "react";
 import Link from "next/link";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import * as globals from "../globals";
 import { date2string } from "./utilities.js";
 

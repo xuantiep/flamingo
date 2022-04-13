@@ -1,7 +1,9 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import * as globals from "../globals";
 import Head from "next/head";
+import React from "react";
 
 export default function TwitterFeed(props) {
   return (

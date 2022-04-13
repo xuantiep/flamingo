@@ -1,6 +1,7 @@
 import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { Global, css, jsx } from "@emotion/core";
+import { Global, css, jsx } from "@emotion/react";
 import Head from "next/head";
 
 import * as globals from "../globals";

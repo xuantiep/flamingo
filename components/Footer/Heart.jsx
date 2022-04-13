@@ -1,6 +1,7 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from "@emotion/react";
 
 /**
  * Heart.
@@ -17,5 +18,5 @@ export default function Heart(props) {
     >
       ♥
     </span>
-  )
+  );
 }

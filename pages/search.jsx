@@ -1,16 +1,17 @@
 import PageWrapper from "../layouts/PageWrapper";
 import React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import Error from "next/error";
 import Head from "next/head";
 import SearchResults from "../components/SearchResults";
 
 function decodeURIComponentSafe(s) {
   if (!s) {
-      return s;
+    return s;
   }
-  return decodeURIComponent(s.replace(/%(?![0-9][0-9a-fA-F]+)/g, '%25'));
+  return decodeURIComponent(s.replace(/%(?![0-9][0-9a-fA-F]+)/g, "%25"));
 }
 
 class Search extends React.Component {
@@ -37,9 +38,13 @@ class Search extends React.Component {
         `}
       >
         <Head>
-          <title>{`Search: ${decodeURIComponentSafe(this.props.q)} - Daily Bruin`}</title>
+          <title>{`Search: ${decodeURIComponentSafe(
+            this.props.q
+          )} - Daily Bruin`}</title>
         </Head>
-        <SearchResults query={decodeURIComponentSafe(this.props.q)}></SearchResults>
+        <SearchResults
+          query={decodeURIComponentSafe(this.props.q)}
+        ></SearchResults>
       </div>
     );
   }

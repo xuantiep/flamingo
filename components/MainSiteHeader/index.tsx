@@ -1,27 +1,28 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from "@emotion/react";
 
-import * as MainSiteStyles from '../globals'
-import HeaderBar from './HeaderBar'
+import * as MainSiteStyles from "../globals";
+import HeaderBar from "./HeaderBar";
 
 interface MainSiteHeaderLink {
   /** Category name */
-  category: string
+  category: string;
   /** Link location */
-  categoryURL: string
+  categoryURL: string;
 }
 
 interface MainSiteHeaderProps {
   /** Array of links that refer to sections on the main site */
-  links: MainSiteHeaderLink[]
+  links: MainSiteHeaderLink[];
   /** Display smaller version with hamburger */
-  hamburger: boolean
+  hamburger: boolean;
 }
 
 class MainSiteHeader extends React.Component<MainSiteHeaderProps> {
   constructor(props: MainSiteHeaderProps) {
-    super(props)
+    super(props);
   }
 
   public render() {
@@ -50,8 +51,8 @@ class MainSiteHeader extends React.Component<MainSiteHeaderProps> {
           <HeaderBar {...this.props} hamburger={this.props.hamburger} />
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default MainSiteHeader
+export default MainSiteHeader;

@@ -75,15 +75,6 @@ class MyApp extends App {
       }
       loadChartbeat();
 
-      function flyteDeskSetup (s, p)  { 
-        var f = document.getElementsByTagName(s)[0]; 
-        var j = document.createElement(s);
-        j.id = 'flytedigital';
-        j.async = true;
-        j.src = 'https://digital.flytedesk.com/js/head.js#' + p;
-        f.parentNode.insertBefore(j, f) 
-      };
-      flyteDeskSetup('script', '8b8311d2-981d-458c-8590-a1f98bff09cf');
     }
     ctag();
 

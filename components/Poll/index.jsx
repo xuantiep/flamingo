@@ -1,28 +1,29 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import * as MainSiteStyles from '../globals'
-import Choice from './Choice'
-import Question from './Question'
-import Graph from './Graph'
+import { css, jsx } from "@emotion/react";
+import * as MainSiteStyles from "../globals";
+import Choice from "./Choice";
+import Question from "./Question";
+import Graph from "./Graph";
 
 class Poll extends React.Component {
-   state = {
-    hasVoted: false,
-  }
+  state = {
+    hasVoted: false
+  };
 
   constructor(props) {
-    super(props)
-    this.handler = this.handler.bind(this)
+    super(props);
+    this.handler = this.handler.bind(this);
   }
 
-   handler() {
+  handler() {
     this.setState({
-      hasVoted: true,
-    })
+      hasVoted: true
+    });
   }
 
-   render() {
+  render() {
     const renderedChoices = this.props.poll.map((poll, index) => (
       <Choice
         choice={poll.choice}
@@ -30,7 +31,7 @@ class Poll extends React.Component {
         key={index}
         handler={this.handler}
       />
-    ))
+    ));
 
     return (
       <div
@@ -59,7 +60,7 @@ class Poll extends React.Component {
               overflow-wrap: break-word;
             `}
           >
-            {'POLL'}
+            {"POLL"}
           </h2>
         </div>
         <Question text={this.props.question} />
@@ -74,8 +75,8 @@ class Poll extends React.Component {
           )}
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Poll
+export default Poll;

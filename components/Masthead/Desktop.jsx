@@ -1,8 +1,10 @@
 import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { Global, css, jsx } from "@emotion/core";
+import { Global, css, jsx } from "@emotion/react";
 import moment from "moment";
 import Head from "next/head";
+import Image from "next/image";
 
 import * as globals from "../globals";
 
@@ -11,8 +13,18 @@ import menuIcon from "./menu.svg";
 import searchIcon from "./search.svg";
 import minisearchIcon from "./minisearch.svg";
 
-let expandedHeight = "106px";
-let collapsedHeight = "60px";
+const expandedHeight = "106px";
+const collapsedHeight = "60px";
+const logoHeight = "60px";
+const logoSmallHeight = "48px";
+
+import facebook from "./facebook.svg";
+import instagram from "./instagram.svg";
+import mail from "./mail.svg";
+import overlooked from "./overlooked.png";
+import prankd from "./prankd.svg";
+import twitter from "./twitter.svg";
+import youtube from "./youtube.png";
 
 export default class Desktop extends React.Component {
   constructor(props) {
@@ -21,9 +33,8 @@ export default class Desktop extends React.Component {
       menuExpanded: true,
       searchExpanded: false
     };
-    this.MastheadCard = React.createRef();
+
     this.SearchBar = React.createRef();
-    this.Logo = React.createRef();
 
     this.isScrolled = this.isScrolled.bind(this);
     this.expandMenu = this.expandMenu.bind(this);
@@ -39,6 +50,10 @@ export default class Desktop extends React.Component {
     window.removeEventListener("scroll", this.isScrolled);
   }
 
+  componentDidUpdate() {
+    // console.log("this.state.menuExpanded is " + this.state.menuExpanded); // debugging purposes
+  }
+
   isScrolled() {
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.collapseMenu();
@@ -52,24 +67,14 @@ export default class Desktop extends React.Component {
   }
 
   expandMenu() {
-    const block = this.MastheadCard.current;
-    const logo = this.Logo.current;
     if (!this.state.menuExpanded) {
-      block.style.height = expandedHeight;
-      logo.style.height = "60px";
-      this.state.menuExpanded = true;
+      // consider putting a delay her and below to make transition more smooth
+      this.setState({ menuExpanded: true });
     }
   }
 
   collapseMenu() {
-    const block = this.MastheadCard.current;
-    const logo = this.Logo.current;
-    if (this.state.menuExpanded) {
-      block.style.height = collapsedHeight;
-      logo.style.height = "48px";
-
-      this.state.menuExpanded = false;
-    }
+    if (this.state.menuExpanded) this.setState({ menuExpanded: false });
   }
 
   expandSearch() {
@@ -113,12 +118,12 @@ export default class Desktop extends React.Component {
     }
     return (
       <div
-        ref={this.MastheadCard}
+        // ref={this.MastheadCard}
         css={css`
           background: #ffffff;
           box-shadow: ${globals.cardShadow};
           overflow: hidden;
-          height: ${expandedHeight};
+          height: ${this.state.menuExpanded ? expandedHeight : collapsedHeight};
           transition: height 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
           position: sticky;
           top: 0;
@@ -168,7 +173,6 @@ export default class Desktop extends React.Component {
             `}
           >
             <a
-              ref={this.Logo}
               href="/"
               css={css`
                 display: inline-block;
@@ -181,17 +185,14 @@ export default class Desktop extends React.Component {
                 }
               `}
             >
-              <img
-                src={
-                  date.date() == 1 && date.month() == 3
-                    ? require("./prankd.svg")
-                    : logo
-                }
+              <Image
+                src={date.date() == 1 && date.month() == 3 ? prankd : logo}
                 css={css`
                   display: inline-block;
                   height: 100%;
                 `}
-              ></img>
+                height={this.state.menuExpanded ? logoHeight : logoSmallHeight}
+              />
               {date.date() == 1 && date.month() == 3 && (
                 <>
                   <Head>
@@ -266,7 +267,7 @@ export default class Desktop extends React.Component {
                       display: inline-block;
                       vertical-align: middle;
                     }
-                    & a img {
+                    & a > Image {
                       display: block;
                       height: 14px;
                     }
@@ -280,43 +281,52 @@ export default class Desktop extends React.Component {
                     href="https://www.facebook.com/dailybruin"
                     target="_blank"
                     rel="noopener"
+                    alt="Facebook"
                   >
-                    <img src={require("./facebook.svg")} />
+                    <Image
+                      src={facebook}
+                      alt="FaceBook logo"
+                      css={css`
+                        ${this.props.darkmode
+                          ? "filter: invert(100%);"
+                          : ""}; // will need to apply darkmode applic to other hardcoded icons soon
+                      `}
+                    />
                   </a>
                   <a
                     href="https://www.twitter.com/dailybruin"
                     target="_blank"
                     rel="noopener"
                   >
-                    <img src={require("./twitter.svg")} />
+                    <Image src={twitter} alt="Twitter logo" />
                   </a>
                   <a
                     href="https://www.instagram.com/dailybruin"
                     target="_blank"
                     rel="noopener"
                   >
-                    <img src={require("./instagram.svg")} />
+                    <Image src={instagram} alt="Instagram logo" />
                   </a>
                   <a
                     href="http://eepurl.com/cFEiZX"
                     target="_blank"
                     rel="noopener"
                   >
-                    <img src={require("./mail.svg")} />
+                    <Image src={mail} alt="Mail icon" />
                   </a>
                   <a
                     href="https://www.overlooked.com"
                     target="_blank"
                     rel="noopener"
                   >
-                    <img src={require("./overlooked.png")} />
+                    {/* <Image src={overlooked} alt="Overlooked logo" /> */}
                   </a>
                   <a
                     href="https://www.youtube.com/user/ucladailybruin"
                     target="_blank"
                     rel="noopener"
                   >
-                    <img src={require("./youtube.png")} />
+                    {/* <Image src={youtube} alt="Youtube logo" /> */}
                   </a>
                 </div>
                 <a href="/advertise">Advertise</a>
@@ -426,7 +436,7 @@ export default class Desktop extends React.Component {
                     `}
                     onClick={this.expandSearch}
                   >
-                    <img
+                    <Image
                       id="Masthead__SearchIconBox"
                       css={css`
                         display: inline-block;
@@ -436,8 +446,9 @@ export default class Desktop extends React.Component {
                         width: 36px;
                         height: 36px;
                       `}
+                      alt="search icon"
                       src={searchIcon}
-                    ></img>
+                    ></Image>
                   </div>
                 </form>
               </div>

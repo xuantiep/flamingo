@@ -1,6 +1,7 @@
 import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import * as globals from "../globals";
 import InFocusLogo from "./infocus.png";
 import * as utilities from "./utilities";

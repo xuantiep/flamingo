@@ -1,14 +1,15 @@
-import * as React from 'react'
+import * as React from "react";
+/** @jsxRuntime classic */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
-import Heart from './Heart'
-import toSentence from '../../utils/toSentence'
+import { css, jsx } from "@emotion/react";
+import Heart from "./Heart";
+import toSentence from "../../utils/toSentence";
 
 /** A footer to go at the bottom of every page. */
 class Footer extends React.Component {
   defaultProps = {
-    license: License.Copyright,
-  }
+    license: License.Copyright
+  };
 
   render() {
     return (
@@ -31,7 +32,7 @@ class Footer extends React.Component {
         <div>
           <span>
             Content copyright © {this.props.copyrightYear} Daily Bruin.
-          </span>{' '}
+          </span>{" "}
           {!!this.props.githubName && (
             <span
               css={css`
@@ -40,28 +41,28 @@ class Footer extends React.Component {
                 }
               `}
             >
-              Site code available on{' '}
+              Site code available on{" "}
               <a
                 href={`https://github.com/dailybruin/${this.props.githubName}`}
               >
                 GitHub
               </a>
               {this.props.license === License.Copyright
-                ? '.'
+                ? "."
                 : ` and available under the ${this.props.license}.`}
             </span>
           )}
         </div>
         <div>
-          Built with Suzy’s <Heart /> in Kerckhoff 118 by{' '}
-          {typeof this.props.developers === 'string'
+          Built with Suzy’s <Heart /> in Kerckhoff 118 by{" "}
+          {typeof this.props.developers === "string"
             ? this.props.developers
             : toSentence(this.props.developers)}
           .
         </div>
       </footer>
-    )
+    );
   }
 }
 
-export default Footer
+export default Footer;
