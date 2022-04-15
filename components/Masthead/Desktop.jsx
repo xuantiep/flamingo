@@ -267,7 +267,7 @@ export default class Desktop extends React.Component {
                       display: inline-block;
                       vertical-align: middle;
                     }
-                    & a > Image {
+                    & a > * {
                       display: block;
                       height: 14px;
                     }
@@ -291,6 +291,8 @@ export default class Desktop extends React.Component {
                           ? "filter: invert(100%);"
                           : ""}; // will need to apply darkmode applic to other hardcoded icons soon
                       `}
+                      height={14}
+                      width={14}
                     />
                   </a>
                   <a
@@ -298,35 +300,56 @@ export default class Desktop extends React.Component {
                     target="_blank"
                     rel="noopener"
                   >
-                    <Image src={twitter} alt="Twitter logo" />
+                    <Image
+                      src={twitter}
+                      alt="Twitter logo"
+                      height={14}
+                      width={14}
+                    />
                   </a>
                   <a
                     href="https://www.instagram.com/dailybruin"
                     target="_blank"
                     rel="noopener"
                   >
-                    <Image src={instagram} alt="Instagram logo" />
+                    <Image
+                      src={instagram}
+                      alt="Instagram logo"
+                      height={14}
+                      width={14}
+                    />
                   </a>
                   <a
                     href="http://eepurl.com/cFEiZX"
                     target="_blank"
                     rel="noopener"
                   >
-                    <Image src={mail} alt="Mail icon" />
+                    <Image src={mail} alt="Mail icon" height={14} width={14} />
                   </a>
                   <a
                     href="https://www.overlooked.com"
                     target="_blank"
                     rel="noopener"
                   >
-                    {/* <Image src={overlooked} alt="Overlooked logo" /> */}
+                    <Image
+                      src={overlooked}
+                      alt="Overlooked logo"
+                      height={14}
+                      width={14}
+                    />
                   </a>
                   <a
                     href="https://www.youtube.com/user/ucladailybruin"
                     target="_blank"
                     rel="noopener"
                   >
-                    {/* <Image src={youtube} alt="Youtube logo" /> */}
+                    <Image
+                      src={youtube}
+                      alt="Youtube logo"
+                      height={14}
+                      width={14}
+                      // layout="fixed"
+                    />
                   </a>
                 </div>
                 <a href="/advertise">Advertise</a>
