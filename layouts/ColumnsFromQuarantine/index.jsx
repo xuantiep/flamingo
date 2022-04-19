@@ -8,7 +8,7 @@ import ArticleCarousel from "../../components/ArticleCarousel/index.jsx";
 import header from "./columnsfromquarantine.svg";
 import MainSiteFooter from "../../components/MainSiteFooter";
 import Masthead from "../../components/Masthead";
-
+import Image from "next/image";
 export default class ColumnsFromQuarantineLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -106,7 +106,7 @@ export default class ColumnsFromQuarantineLayout extends React.Component {
             `}
             href="/"
           >
-            <img
+            <Image
               src={header}
               css={css`
                 width: 100%;
